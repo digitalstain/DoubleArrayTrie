@@ -14,8 +14,8 @@ public class TestDoubleArrayTrie extends TestCase {
 	public void testRobustnessUnderStress() {
 		
 		final int ALPHABET_SIZE = 120;
-		final int NUMBER_OF_STRINGS = 1000;
-		final int MAXIMUM_STRING_SIZE = 20;
+		final int NUMBER_OF_STRINGS = 100000;
+		final int MAXIMUM_STRING_SIZE = 100;
 
 		List<IntegerList> data = new ArrayList<IntegerList>(NUMBER_OF_STRINGS);
 		AbstractDoubleArrayTrie trie = new DoubleArrayTrieImpl(ALPHABET_SIZE);
@@ -47,8 +47,8 @@ public class TestDoubleArrayTrie extends TestCase {
 		}
 
 		// TODO
-		// Insert a NOT_FOUND random case here that is deterministic and dependent
-		// on the inserted strings.
+		// Insert a NOT_FOUND test here that is on the one hand random and
+		// on the other succeeds always regardless of the generated strings.
 	}
 
 	public void testMarginCases() {
