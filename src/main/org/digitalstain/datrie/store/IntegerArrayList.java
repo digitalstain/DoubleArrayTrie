@@ -39,7 +39,7 @@ import java.util.Arrays;
  */
 public class IntegerArrayList implements IntegerList {
 
-	private final int INCREASE_RATIO_NOMINATOR;
+	private final int INCREASE_RATIO_NUMERATOR;
 
 	private final int INCREASE_RATIO_DENOMINATOR;
 	
@@ -76,12 +76,12 @@ public class IntegerArrayList implements IntegerList {
 	 * this constructor allows for specifying the growth characteristics.
 	 * Whenever an increase of the storing array is needed, its new size is calculated as 
 	 * 
-	 * <p>newCapacity = oldCapacity*(nominator/denominator) + fixed</p>
+	 * <p>newCapacity = oldCapacity*(numerator/denominator) + fixed</p>
 	 * 
 	 * These values cannot be changed after construction.
 	 * 
 	 * @param initialCapacity The initial capacity of the list
-	 * @param incRatioNom The nominator of the capacity increase fraction
+	 * @param incRatioNom The numerator of the capacity increase fraction
 	 * @param incRatioDenom The denominator of the capacity increase fraction
 	 * @param fixedInc The fixed value added after the multiplication
 	 */
@@ -89,7 +89,7 @@ public class IntegerArrayList implements IntegerList {
 		if (initialCapacity < 0)
 			throw new IllegalArgumentException("Negative capacity specified " + initialCapacity);
 		this.data = new int[initialCapacity];
-		this.INCREASE_RATIO_NOMINATOR = incRatioNom;
+		this.INCREASE_RATIO_NUMERATOR = incRatioNom;
 		this.INCREASE_RATIO_DENOMINATOR = incRatioDenom;
 		this.FIXED_INCREASE = fixedInc;
 	}
@@ -104,7 +104,7 @@ public class IntegerArrayList implements IntegerList {
 	private void ensureCapacity(int capacity) {
 		int oldCapacity = data.length;
 		if (capacity > oldCapacity) {
-			int newCapacity = (oldCapacity * INCREASE_RATIO_NOMINATOR) / INCREASE_RATIO_DENOMINATOR + FIXED_INCREASE;
+			int newCapacity = (oldCapacity * INCREASE_RATIO_NUMERATOR) / INCREASE_RATIO_DENOMINATOR + FIXED_INCREASE;
 			if (newCapacity < capacity)
 				newCapacity = capacity;
 			data = Arrays.copyOf(data, newCapacity);

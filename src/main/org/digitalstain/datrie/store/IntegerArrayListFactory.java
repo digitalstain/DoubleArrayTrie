@@ -29,16 +29,16 @@ package org.digitalstain.datrie.store;
 public class IntegerArrayListFactory implements IntegerListFactory {
 
 	private final int initialCapacity;
-	private final int nominator;
+	private final int numerator;
 	private final int denominator;
 	private final int fixedInc;
 
 	/**
 	 * Private, for use by static factory methods.
 	 */
-	private IntegerArrayListFactory(int initialCapacity, int nominator, int denominator, int fixedInc) {
+	private IntegerArrayListFactory(int initialCapacity, int numerator, int denominator, int fixedInc) {
 		this.initialCapacity = initialCapacity;
-		this.nominator = nominator;
+		this.numerator = numerator;
 		this.denominator = denominator;
 		this.fixedInc = fixedInc;
 	}
@@ -46,16 +46,16 @@ public class IntegerArrayListFactory implements IntegerListFactory {
 	/**
 	 * Creates and returns an <tt>IntegerListFactory</tt> that manufactures <tt>IntegerArrayList</tt>s
 	 * with an initial capacity of <tt>initialCapacity</tt> and a growth factor of <p>
-	 * <tt>nominator/denominator + fixedInc</tt>
+	 * <tt>numerator/denominator + fixedInc</tt>
 	 * 
 	 * @param initialCapacity The initialCapacity of the Array
-	 * @param nominator
+	 * @param numerator
 	 * @param denominator
 	 * @param fixedInc
 	 * @return
 	 */
-	public static IntegerArrayListFactory newInstance(int initialCapacity, int nominator, int denominator, int fixedInc) {
-		return new IntegerArrayListFactory(initialCapacity, nominator, denominator, fixedInc);
+	public static IntegerArrayListFactory newInstance(int initialCapacity, int numerator, int denominator, int fixedInc) {
+		return new IntegerArrayListFactory(initialCapacity, numerator, denominator, fixedInc);
 	}
 
 	/**
@@ -72,6 +72,6 @@ public class IntegerArrayListFactory implements IntegerListFactory {
 	 * @see org.digitalstain.datrie.store.IntegerListFactory#getNewIntegerList()
 	 */
 	public IntegerList getNewIntegerList() {
-		return new IntegerArrayList(initialCapacity, nominator, denominator, fixedInc);
+		return new IntegerArrayList(initialCapacity, numerator, denominator, fixedInc);
 	}
 }
