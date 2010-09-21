@@ -141,51 +141,42 @@ public class DoubleArrayTrieImpl extends AbstractDoubleArrayTrie {
 	 */
 	private int findConsecutiveFree(int amount) {
 
-		Iterator<Integer> it = freePositions.iterator();
-		int from;
-		Integer current;
-		int previous;
-		boolean found;
-
+		assert amount >= 0;
 		/*
-		 *  TODO This is WRONG. Positions already checked shouldn't be
-		 *  checked again by advancing an iterator, since there is no way
-		 *  they can form a consecutive integer set. Instead, the next
-		 *  position to check at the outer loop should be the higher()
-		 *  of the last failed check.   
+		 * Quick way out, that also ensures the invariants
+		 * of the main loop.
 		 */
-		// For each free position.
-		while (it.hasNext()) {
-			found = true;
-			from = it.next().intValue();
-			// We start searching from the current Iterator position.
-			current = from;
-			previous = current;
-			// For each needed place, except the first
-			for (int i = 1; i < amount; i++) {
-				// Get the next greater free position.
-				current = freePositions.higher(previous);
-				// System.out.println("checking that higher of "+previous+ " is
-				// "+current+" for free set "+freePositions);
-				// If they differ exactly one, check the next
-				if (current != null && current.intValue() - previous == 1) {
-					previous = current;
-					continue;
-				}
-				// Else fail.
-				found = false;
-				break;
+		if (freePositions.isEmpty()) {
+			return -1;
+		}
+
+		Iterator<Integer> it = freePositions.iterator();
+		Integer from; 		// The location from where the positions begin
+		Integer current;	// The next integer in the set
+		Integer previous;	// The previously checked index
+		int consecutive;	// How many consecutive positions have we seen so far 
+		
+		from = it.next();	// Guaranteed to succeed, from the if at the start
+		previous = from;	// The first previous is the first in the series
+		consecutive = 1;	// 1, since from is a valid location
+		while(consecutive < amount && it.hasNext()) {
+			current = it.next();
+			if (current - previous == 1) {
+				previous = current;
+				consecutive++;
 			}
-			// If the loop did not mark not found, just return the iterator
-			// value.
-			if (found) {
-				// System.out.println("Requested "+amount+" free positions and
-				// returned "+from+" from free position set "+freePositions);
-				return from;
+			else {
+				from = current;
+				previous = from;
+				consecutive = 1;
 			}
 		}
-		// Could not find free spots, return -1.
-		return -1;
+		if (consecutive == amount) {
+			return from;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	/**
