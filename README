@@ -1,0 +1,45 @@
+Copyright 2010 Christos Gioran
+
+This file is part of DoubleArrayTrie.
+
+DoubleArrayTrie is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+DoubleArrayTrie is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with DoubleArrayTrie.  If not, see <http://www.gnu.org/licenses/>.
+
+=========================================================================
+
+DoubleArrayTrie is a pure Java implementation of a double array trie. This
+is a radix tree implemented using two arrays to store the transition diagram
+instead of pointers/nodes. It is slower for insertions that the graph implementation
+but is blazingly fast for retrieval.
+
+There are 4 parts to this project.
+
+One is the implementation of the algorithm itself
+found in AbstractDoubleArrayTrie. Extending that is DoubleArrayTrieImpl that implements
+the storage management using two ArrayLists - this is done so that additional storage
+schemes can be used, such as an odd/even index single array.
+
+The second is examples consisting of a CountTrie that simply implements the
+calls from  AbstractDoubleArrayTrie to count insertions and searches. This, along
+with the test cases provide usage examples (documentation is currently limited to the
+above, the source and the javadocs).
+
+The third is a barebones implementation of a resizing array of integers, because the java
+core libraries do not provide collections for primitive values and the overhead from the
+wrapper classes is prohibitive. These are found in org.digitalstain.datrie.store
+
+The forth and final part is a preeliminary attempt to provide a wrapper for the common
+use case of a trie, i.e. storing strings. It shows succinctly but correctly the assumptions
+that underlie the operation of AbstractDoubleArrayTrie and a way to map string using it.
+
+Most of the above will soon be uploaded as a separate documentation project.
