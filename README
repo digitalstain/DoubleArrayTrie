@@ -43,3 +43,12 @@ use case of a trie, i.e. storing strings. It shows succinctly but correctly the 
 that underlie the operation of AbstractDoubleArrayTrie and a way to map string using it.
 
 Most of the above will soon be uploaded as a separate documentation project.
+
+In order to create useful extentions of the core structure, you must first understand how
+it works so that you can correctly consume the events of the movement of states around the
+backing storage. A very good discription is at
+
+http://linux.thai.net/~thep/datrie/datrie.html
+
+from Theppitak Karoonboonyanan, who also provides libdatrie, a C implementation of the same.
+
